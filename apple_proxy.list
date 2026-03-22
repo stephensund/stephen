@@ -1,0 +1,28 @@
+# ===== Apple 海外服务，需要代理 =====
+DOMAIN-SUFFIX,apple.news
+DOMAIN-SUFFIX,apple-cloudkit.com
+DOMAIN-SUFFIX,apple-dns.net
+DOMAIN-SUFFIX,apple-mapkit.com
+DOMAIN-SUFFIX,apple.co
+DOMAIN-SUFFIX,itunes.com
+DOMAIN-SUFFIX,appstore.com
+DOMAIN-SUFFIX,me.com
+DOMAIN-SUFFIX,crashlytics.com
+
+# ===== Apple Music / TV（关键）=====
+DOMAIN-SUFFIX,music.apple.com
+DOMAIN-SUFFIX,amp-api.music.apple.com
+DOMAIN-SUFFIX,aod.itunes.apple.com
+DOMAIN-SUFFIX,audio-ssl.itunes.apple.com
+DOMAIN-SUFFIX,tv.apple.com
+DOMAIN-SUFFIX,buy.itunes.apple.com
+
+# ===== Apple 授权、收据验证 =====
+DOMAIN-SUFFIX,gs.apple.com
+DOMAIN-SUFFIX,ocsp.apple.com
+DOMAIN-SUFFIX,appleid.apple.com
+DOMAIN-SUFFIX,idmsa.apple.com
+
+# ===== 国际内容分发 API =====
+DOMAIN-SUFFIX,weather-data.apple.com
+DOMAIN-SUFFIX,maps.apple.com
