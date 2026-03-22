@@ -1,0 +1,27 @@
+# ===== M365 Copilot / Copilot Chat =====
+DOMAIN-SUFFIX,copilot.microsoft.com
+DOMAIN-SUFFIX,copilot.microsoft365.com
+
+# ===== Bing Chat / Copilot Web Core =====
+DOMAIN-SUFFIX,chat.bing.com
+DOMAIN-SUFFIX,bing.com
+DOMAIN-SUFFIX,bingapis.com
+
+# ===== MSN / Copilot 内容服务 =====
+DOMAIN-SUFFIX,msn.com
+
+# ===== Copilot AI Model / Edge Services =====
+DOMAIN-SUFFIX,gpt.microsoft.com
+DOMAIN-SUFFIX,cpt.services.microsoft.com
+DOMAIN-SUFFIX,edgeservices.bing.com
+DOMAIN-SUFFIX,edge.microsoft.com
+DOMAIN-SUFFIX,api.edge.microsoft.com
+
+# ===== Copilot 登录权限验证 =====
+DOMAIN-SUFFIX,microsoftonline.com
+DOMAIN-SUFFIX,live.com
+DOMAIN-SUFFIX,msftauth.net
+DOMAIN-SUFFIX,msauth.net
+
+# ===== Copilot API =====
+DOMAIN-SUFFIX,copilot-api.microsoft.com

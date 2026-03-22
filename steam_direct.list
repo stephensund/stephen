@@ -1,0 +1,22 @@
+# ===== Steam Download CDN =====
+DOMAIN-SUFFIX,steamcontent.com
+DOMAIN-SUFFIX,cs.steampowered.com
+DOMAIN-SUFFIX,client-download.steampowered.com
+
+# ===== 游戏内容分发服务器 =====
+DOMAIN-SUFFIX,cdn.steampowered.com
+DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
+DOMAIN-SUFFIX,steamdownload-a.akamaihd.net
+DOMAIN-SUFFIX,akamaihd.net
+
+# ===== Steam Web Assets（可直连更快）=====
+DOMAIN-SUFFIX,steamstat.us
+DOMAIN-SUFFIX,steampipe.steamcontent.com
+
+# ===== SteamVR / 运行时更新 =====
+DOMAIN-SUFFIX,steamvr.com
+DOMAIN-SUFFIX,vrcontent.com
+
+# ===== Valve 基础服务（中国可直连）=====
+DOMAIN-SUFFIX,valvesoftware.com
+DOMAIN-SUFFIX,steampowered.com

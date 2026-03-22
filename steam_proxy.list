@@ -1,0 +1,22 @@
+# ===== Steam Community / Market / Workshop =====
+DOMAIN-SUFFIX,steamcommunity.com
+DOMAIN-SUFFIX,steamchat.com
+DOMAIN-SUFFIX,steamstatic.com
+DOMAIN-SUFFIX,steamusercontent.com
+DOMAIN-SUFFIX,steamuserimages-a.akamaihd.net
+DOMAIN-SUFFIX,steamstore-a.akamaihd.net
+
+# ===== Steam Store API（部分页面被墙）=====
+DOMAIN-SUFFIX,store.steampowered.com
+DOMAIN-SUFFIX,help.steampowered.com
+
+# ===== Steam UGC 内容（截图/作品/头像）=====
+DOMAIN-SUFFIX,ugc.cdn.steampowered.com
+DOMAIN-SUFFIX,community.cloudflare.steamstatic.com
+
+# ===== Valve 登录验证（被墙较严重）=====
+DOMAIN-SUFFIX,login.steampowered.com
+DOMAIN-SUFFIX,api.steampowered.com
+
+# ===== Steam Web SSO =====
+DOMAIN-SUFFIX,steambroadcast.akamaized.net

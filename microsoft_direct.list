@@ -1,0 +1,34 @@
+# ===== Windows Update =====
+DOMAIN-SUFFIX,windowsupdate.com
+DOMAIN-SUFFIX,update.microsoft.com
+DOMAIN-SUFFIX,download.windowsupdate.com
+DOMAIN-SUFFIX,windowsupdate.microsoft.com
+
+# ===== Office / M365 =====
+DOMAIN-SUFFIX,office.com
+DOMAIN-SUFFIX,microsoft.com
+DOMAIN-SUFFIX,officecdn.microsoft.com
+DOMAIN-SUFFIX,officecdn.microsoft.com.edgesuite.net
+DOMAIN-SUFFIX,officeapps.live.com
+
+# ===== OneDrive =====
+DOMAIN-SUFFIX,onedrive.live.com
+DOMAIN-SUFFIX,api.onedrive.com
+DOMAIN-SUFFIX,storage.live.com
+
+# ===== Outlook / 邮箱 =====
+DOMAIN-SUFFIX,outlook.office.com
+DOMAIN-SUFFIX,outlook.live.com
+DOMAIN-SUFFIX,outlook.com
+
+# ===== Microsoft Store =====
+DOMAIN-SUFFIX,storeedgefd.dsx.mp.microsoft.com
+DOMAIN-SUFFIX,storeedgefd.officeapps.live.com
+DOMAIN-SUFFIX,store.microsoft.com
+
+# ===== Graph API（基础 M365）=====
+DOMAIN-SUFFIX,graph.microsoft.com
+
+# ===== Teams / Skype =====
+DOMAIN-SUFFIX,teams.microsoft.com
+DOMAIN-SUFFIX,skype.com
