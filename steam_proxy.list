@@ -1,22 +1,25 @@
-# ===== Steam Community / Market / Workshop =====
-DOMAIN-SUFFIX,steamcommunity.com
-DOMAIN-SUFFIX,steamchat.com
+# ===== Steam Store / Web =====
 DOMAIN-SUFFIX,steamstatic.com
-DOMAIN-SUFFIX,steamusercontent.com
-DOMAIN-SUFFIX,steamuserimages-a.akamaihd.net
-DOMAIN-SUFFIX,steamstore-a.akamaihd.net
-
-# ===== Steam Store API（部分页面被墙）=====
 DOMAIN-SUFFIX,store.steampowered.com
 DOMAIN-SUFFIX,help.steampowered.com
+DOMAIN-SUFFIX,steamcommunity.com
+DOMAIN-SUFFIX,steamcontent.com
+DOMAIN-SUFFIX,cdn.steampowered.com
+DOMAIN-SUFFIX,steamcdn-a.akamaihd.net
+DOMAIN-SUFFIX,steamdownload-a.akamaihd.net
+DOMAIN-SUFFIX,akamaihd.net
+DOMAIN-SUFFIX,fastly.net
 
-# ===== Steam UGC 内容（截图/作品/头像）=====
-DOMAIN-SUFFIX,ugc.cdn.steampowered.com
-DOMAIN-SUFFIX,community.cloudflare.steamstatic.com
+# ===== Steam Login / Auth =====
+DOMAIN-SUFFIX,steamapis.com
+DOMAIN-SUFFIX,steamstat.us
 
-# ===== Valve 登录验证（被墙较严重）=====
-DOMAIN-SUFFIX,login.steampowered.com
-DOMAIN-SUFFIX,api.steampowered.com
+# ===== Steam 客户端网络通信 =====
+DOMAIN-SUFFIX,cm.steampowered.com
+DOMAIN-SUFFIX,cm2.steampowered.com
+DOMAIN-SUFFIX,steampipe.steamcontent.com
 
-# ===== Steam Web SSO =====
-DOMAIN-SUFFIX,steambroadcast.akamaized.net
+# ===== Steam 下载 CDN =====
+DOMAIN-SUFFIX,cs.steampowered.com
+DOMAIN-SUFFIX,content.steampowered.com
+DOMAIN-SUFFIX,client-download.steampowered.com
