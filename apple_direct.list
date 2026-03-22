@@ -1,0 +1,36 @@
+# ===== Apple CDN（直连速度更快）=====
+DOMAIN-SUFFIX,aaplimg.com
+DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,apps.mzstatic.com
+
+# ===== App Store 下载节点 =====
+DOMAIN-SUFFIX,appldnld.apple.com
+DOMAIN-SUFFIX,appldnld-lb.apple.com
+DOMAIN-SUFFIX,appldnld.g.aaplimg.com
+
+# ===== 系统更新 CDN =====
+DOMAIN-SUFFIX,swcdn.apple.com
+DOMAIN-SUFFIX,swscan.apple.com
+
+# ===== iCloud（中国区必须直连）=====
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,icloud-content.com
+DOMAIN-SUFFIX,icloud.com.cn
+
+# ===== Apple 主站（安全直连）=====
+DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,apple.com.cn
+DOMAIN-SUFFIX,akadns.net
+
+# ===== Apple 全局 IP 段（直连）=====
+IP-CIDR,17.0.0.0/8,no-resolve
+IP-CIDR,63.92.224.0/19,no-resolve
+IP-CIDR,65.199.22.0/23,no-resolve
+IP-CIDR,139.178.128.0/18,no-resolve
+IP-CIDR,144.178.0.0/19,no-resolve
+IP-CIDR,144.178.36.0/22,no-resolve
+IP-CIDR,144.178.48.0/20,no-resolve
+IP-CIDR,192.35.50.0/24,no-resolve
+IP-CIDR,198.183.17.0/24,no-resolve
+IP-CIDR,205.180.175.0/24,no-resolve
