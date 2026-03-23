@@ -1,27 +1,46 @@
-# ===== M365 Copilot / Copilot Chat =====
+# ===== Copilot Core =====
 DOMAIN-SUFFIX,copilot.microsoft.com
 DOMAIN-SUFFIX,copilot.microsoft365.com
 
-# ===== Bing Chat / Copilot Web Core =====
-DOMAIN-SUFFIX,chat.bing.com
+# ===== Bing / Sydney / Copilot Web =====
 DOMAIN-SUFFIX,bing.com
+DOMAIN-SUFFIX,chat.bing.com
 DOMAIN-SUFFIX,bingapis.com
+DOMAIN,api.bing.microsoft.com
+DOMAIN,sydney.bing.com
 
-# ===== MSN / Copilot 内容服务 =====
-DOMAIN-SUFFIX,msn.com
-
-# ===== Copilot AI Model / Edge Services =====
-DOMAIN-SUFFIX,gpt.microsoft.com
-DOMAIN-SUFFIX,cpt.services.microsoft.com
+# ===== Copilot Edge Services =====
 DOMAIN-SUFFIX,edgeservices.bing.com
 DOMAIN-SUFFIX,edge.microsoft.com
 DOMAIN-SUFFIX,api.edge.microsoft.com
 
-# ===== Copilot 登录权限验证 =====
+# ===== Microsoft Account / Auth =====
 DOMAIN-SUFFIX,microsoftonline.com
 DOMAIN-SUFFIX,live.com
 DOMAIN-SUFFIX,msftauth.net
 DOMAIN-SUFFIX,msauth.net
 
-# ===== Copilot API =====
+# ===== Microsoft Graph / Office 必需 =====
+DOMAIN-SUFFIX,graph.microsoft.com
+DOMAIN-SUFFIX,graph.microsoft.us
+DOMAIN-SUFFIX,office.com
+DOMAIN-SUFFIX,office365.com
+DOMAIN-SUFFIX,office.net
+DOMAIN-SUFFIX,sharepoint.com
+DOMAIN-SUFFIX,sharepointonline.com
+DOMAIN-SUFFIX,onenote.com
+DOMAIN-SUFFIX,onedrive.com
+
+# ===== WebSocket 必需 =====
+DOMAIN-SUFFIX,teams.microsoft.com
+DOMAIN-SUFFIX,skype.com
+DOMAIN,api.microsoftstream.com
+DOMAIN,mediastream.microsoft.com
+
+# ===== 可能需要（增强兼容，非硬性） =====
+DOMAIN-SUFFIX,gpt.microsoft.com
+DOMAIN-SUFFIX,cpt.services.microsoft.com
 DOMAIN-SUFFIX,copilot-api.microsoft.com
+
+# ===== Copilot 内容源（可选增强） =====
+DOMAIN-SUFFIX,msn.com
