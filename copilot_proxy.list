@@ -1,26 +1,39 @@
-# ===== Copilot Core =====
+# ===== Copilot 核心服务 (Core Services) =====
+# 聊天、API及主服务域名
 DOMAIN-SUFFIX,copilot.microsoft.com
 DOMAIN-SUFFIX,copilot.microsoft365.com
-
-# ===== Bing / Sydney / Copilot Web =====
-DOMAIN-SUFFIX,bing.com
-DOMAIN-SUFFIX,chat.bing.com
-DOMAIN-SUFFIX,bingapis.com
+DOMAIN-SUFFIX,cloud.microsoft
 DOMAIN,api.bing.microsoft.com
+DOMAIN,api.edge.microsoft.com
+DOMAIN,api.microsoftstream.com
+DOMAIN-SUFFIX,bingapis.com
+DOMAIN-SUFFIX,copilot-api.microsoft.com
+
+# ===== Bing / Sydney / 对话后端 (Chat Backend) =====
+# 必应搜索、对话服务及关联域名
+DOMAIN-SUFFIX,bing.com
+DOMAIN-SUFFIX,www.bing.com
+DOMAIN,chat.bing.com
 DOMAIN,sydney.bing.com
+DOMAIN,sydney.visualstudio.com
 
-# ===== Copilot Edge Services =====
-DOMAIN-SUFFIX,edgeservices.bing.com
+# ===== Microsoft Edge 相关服务 (Edge Services) =====
+# Edge浏览器、数据管道及边缘服务
 DOMAIN-SUFFIX,edge.microsoft.com
-DOMAIN-SUFFIX,api.edge.microsoft.com
+DOMAIN,edgeservices.bing.com
+DOMAIN,browser.pipe.aria.microsoft.com
+DOMAIN,functional.events.data.microsoft.com
 
-# ===== Microsoft Account / Auth =====
+# ===== 账户认证与登录 (Account & Authentication) =====
+# 微软账户登录、身份验证服务
+DOMAIN-SUFFIX,login.microsoftonline.com
 DOMAIN-SUFFIX,microsoftonline.com
-DOMAIN-SUFFIX,live.com
-DOMAIN-SUFFIX,msftauth.net
 DOMAIN-SUFFIX,msauth.net
+DOMAIN-SUFFIX,msftauth.net
+DOMAIN-SUFFIX,login.live.com
 
-# ===== Microsoft Graph / Office 必需 =====
+# ===== Microsoft Graph & Office 365 服务 (Data & Productivity) =====
+# 核心数据API、办公套件及云存储
 DOMAIN-SUFFIX,graph.microsoft.com
 DOMAIN-SUFFIX,graph.microsoft.us
 DOMAIN-SUFFIX,office.com
@@ -30,17 +43,25 @@ DOMAIN-SUFFIX,sharepoint.com
 DOMAIN-SUFFIX,sharepointonline.com
 DOMAIN-SUFFIX,onenote.com
 DOMAIN-SUFFIX,onedrive.com
-
-# ===== WebSocket 必需 =====
+DOMAIN-SUFFIX,outlook.com
+DOMAIN-SUFFIX,outlook.office365.com
 DOMAIN-SUFFIX,teams.microsoft.com
+
+# ===== 实时通信与推送 (Realtime & Notifications) =====
+# WebSocket、实时消息和推送通知服务
 DOMAIN-SUFFIX,skype.com
-DOMAIN,api.microsoftstream.com
-DOMAIN,mediastream.microsoft.com
+DOMAIN,access-point.cloudmessaging.edge.microsoft.com
+DOMAIN,cpt.services.microsoft.com
 
-# ===== 可能需要（增强兼容，非硬性） =====
-DOMAIN-SUFFIX,gpt.microsoft.com
-DOMAIN-SUFFIX,cpt.services.microsoft.com
-DOMAIN-SUFFIX,copilot-api.microsoft.com
-
-# ===== Copilot 内容源（可选增强） =====
+# ===== 媒体与内容服务 (Media & Content) =====
+# 视频流、图像设计及内容源
+DOMAIN-SUFFIX,mediastream.microsoft.com
+DOMAIN,designer.microsoft.com
 DOMAIN-SUFFIX,msn.com
+DOMAIN-SUFFIX,livestream.com
+
+# ===== 其他可能需要的域名 (Optional for Compatibility) =====
+DOMAIN-SUFFIX,microsoft.com
+DOMAIN-SUFFIX,microsoft.us
+DOMAIN-SUFFIX,azure.com
+DOMAIN,gpt.microsoft.com
