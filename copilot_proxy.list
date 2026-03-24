@@ -65,3 +65,17 @@ DOMAIN-SUFFIX,microsoft.com
 DOMAIN-SUFFIX,microsoft.us
 DOMAIN-SUFFIX,azure.com
 DOMAIN,gpt.microsoft.com
+
+DOMAIN,api.copilot.microsoft.com
+DOMAIN,edge-chat.microsoft.com
+DOMAIN,edge-enterprise.microsoft.com
+DOMAIN,api.appcenter.ms
+DOMAIN,appcenter.ms
+DOMAIN,wss.bing.com
+DOMAIN,prod.realtime.microsoft.com
+DOMAIN,rt.services.microsoft.com
+DOMAIN,assets.msn.com
+DOMAIN,login.windows.net
+DOMAIN,config.edge.skype.com
+DOMAIN,client.wns.windows.com
+DOMAIN,notification.msn.com
