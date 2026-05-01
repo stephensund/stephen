@@ -508,7 +508,7 @@ rule-providers:
 
   download:
     <<: *Anchor_RP_TXT
-    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
+    url: https://raw.githubusercontent.com/stephensund/stephen/refs/heads/main/download.list
     path: ./ruleset/download.list
 
 
