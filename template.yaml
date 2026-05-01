@@ -1,0 +1,552 @@
+# =========================
+# Anchors（仅保留通用能力）
+# =========================
+Anchor_PR: &Anchor_PR
+  type: http
+  interval: 86400
+  proxy: DIRECT
+  health-check:
+    enable: true
+    url: "https://www.g.cn/generate_204"
+    interval: 300
+  filter: "^(?!.*(到期|过期|剩余|网址|官网|邮箱|订阅|套餐|流量|说明|重置)).*$"
+
+Anchor_HS: &Anchor_HS
+  type: select
+  include-all: true
+
+Anchor_RP_TXT: &Anchor_RP_TXT
+  type: http
+  interval: 86400
+  behavior: classical
+  format: text
+
+Anchor_RP_YAML: &Anchor_RP_YAML
+  type: http
+  interval: 86400
+  behavior: classical
+  format: yaml
+
+# 区域筛选（按你的 ini 关键词/正则）
+Anchor_HK: &Anchor_HK "(港|HK|Hong Kong)"
+Anchor_JP: &Anchor_JP "(日本|东京|大阪|泉日|埼玉|川日|沪日|深日|日$|JP|Japan)"
+Anchor_US: &Anchor_US "(美|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|US|United States)"
+Anchor_SG: &Anchor_SG "(新加坡|坡|狮城|SG|Singapore)"
+Anchor_TW: &Anchor_TW "(台|新北|彰化|TW|Taiwan)"
+Anchor_KR: &Anchor_KR "(KR|Korea|KOR|首尔|韩|韓)"
+
+
+# =========================
+# Proxy Providers（订阅区）
+# =========================
+proxy-providers:
+  # 按需增删，名称不要重复；把 url 换成你的订阅链接，把机场1 机场2改成对应的名字
+  机场1:
+    <<: *Anchor_PR
+    url: ""
+    override:
+      additional-prefix: "[机场1] "
+  机场2:
+    <<: *Anchor_PR
+    url: ""
+    override:
+      additional-prefix: "[机场2] "
+
+
+# =========================
+# Core Config（保留必要内容）
+# =========================
+mixed-port: 7893
+mode: rule
+allow-lan: true
+bind-address: "*"
+tcp-concurrent: true
+unified-delay: true
+log-level: info
+ipv6: true
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+external-controller: 0.0.0.0:9090
+external-ui-name: zashboard
+external-ui: ui
+secret: ""
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist-no-fonts.zip
+
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack: [0.0.0.0:53]
+  auto-detect-interface: true
+  auto-route: true
+  auto-redirect: true
+  strict-route: false
+  endpoint-independent-nat: true
+
+sniffer:
+  enable: true
+  override-destination: true
+  parse-pure-ip: true
+  force-dns-mapping: true
+  sniff:
+    QUIC:
+      ports: [443]
+    TLS:
+      ports: [443, 8443]
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+  skip-domain:
+    - "+.apple.com"
+    - Mijia Cloud
+    - dlg.io.mi.com
+    - "+.oray.com"
+    - "+.sunlogin.net"
+    - "+.push.apple.com"
+
+dns:
+  enable: true
+  listen: 0.0.0.0:7874
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter-mode: blacklist
+  respect-rules: false
+  fake-ip-filter:
+    - "*.lan"
+  nameserver:
+    - 114.114.114.114
+    - 223.5.5.5
+
+
+# =========================
+# Proxy Groups（严格按 ini）
+# =========================
+proxy-groups:
+  # 主选择
+  - name: "🚀 节点选择"
+    type: select
+    proxies:
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+      - "DIRECT"
+
+  - name: "🚀 手动切换"
+    <<: *Anchor_HS
+
+  # 区域组（按 ini 的 regex）
+  - name: "🇭🇰 香港节点"
+    <<: *Anchor_HS
+    filter: *Anchor_HK
+
+  - name: "🇯🇵 日本节点"
+    <<: *Anchor_HS
+    filter: *Anchor_JP
+
+  - name: "🇺🇲 美国节点"
+    <<: *Anchor_HS
+    filter: *Anchor_US
+
+  - name: "🇸🇬 狮城节点"
+    <<: *Anchor_HS
+    filter: *Anchor_SG
+
+  - name: "🇨🇳 台湾节点"
+    <<: *Anchor_HS
+    filter: *Anchor_TW
+
+  - name: "🇰🇷 韩国节点"
+    <<: *Anchor_HS
+    filter: *Anchor_KR
+
+  # 业务分组（完全按 ini 的候选顺序）
+  - name: "🌏 Pixiv"
+    type: select
+    proxies:
+      - "🚀 手动切换"
+      - "🚀 节点选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "DIRECT"
+
+  - name: "🌏 EHGallery"
+    type: select
+    proxies:
+      - "🚀 手动切换"
+      - "🚀 节点选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "DIRECT"
+
+  - name: "🧚 AI"
+    type: select
+    proxies:
+      - "🚀 手动切换"
+      - "🚀 节点选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "DIRECT"
+
+  - name: "🌏 DMM"
+    type: select
+    proxies:
+      - "🇯🇵 日本节点"
+      - "🚀 节点选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+      - "DIRECT"
+
+  - name: "📲 电报消息"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "🇸🇬 狮城节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+      - "DIRECT"
+
+  - name: "📹 油管视频"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "🇸🇬 狮城节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+      - "DIRECT"
+
+  - name: "📺 哔哩哔哩"
+    type: select
+    proxies:
+      - "🎯 全球直连"
+      - "🇨🇳 台湾节点"
+      - "🇭🇰 香港节点"
+
+  - name: "🌍 国外媒体"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+      - "DIRECT"
+
+  - name: "🌏 国内媒体"
+    type: select
+    proxies:
+      - "DIRECT"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🚀 手动切换"
+
+  - name: "📢 谷歌FCM"
+    type: select
+    proxies:
+      - "DIRECT"
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+
+  - name: "Ⓜ️ 微软云盘"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "DIRECT"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+
+  - name: "Ⓜ️ 微软服务"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "DIRECT"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+
+  - name: "🍎 苹果服务"
+    type: select
+    proxies:
+      - "DIRECT"
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+
+  - name: "🎮 游戏平台"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "🇺🇲 美国节点"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+      - "DIRECT"
+
+  - name: "🎯 全球直连"
+    type: select
+    proxies:
+      - "DIRECT"
+      - "🚀 节点选择"
+
+  - name: "🐟 漏网之鱼"
+    type: select
+    proxies:
+      - "🚀 节点选择"
+      - "DIRECT"
+      - "🇭🇰 香港节点"
+      - "🇨🇳 台湾节点"
+      - "🇸🇬 狮城节点"
+      - "🇯🇵 日本节点"
+      - "🇺🇲 美国节点"
+      - "🇰🇷 韩国节点"
+      - "🚀 手动切换"
+
+
+# =========================
+# Rule Providers（全量映射 ini）
+# =========================
+rule-providers:
+  # 直连/局域网
+  lan:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list
+    path: ./ruleset/lan.list
+
+  unban:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/UnBan.list
+    path: ./ruleset/unban.list
+
+  # Google FCM
+  googlefcm:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/GoogleFCM.list
+    path: ./ruleset/googlefcm.list
+
+  # SteamCN（blackmatrix7）
+  steamcn:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml
+    path: ./ruleset/steamcn.yaml
+
+  # AI（按 ini 多条 ruleset 分拆，全部指向同一策略组 🧚 AI）
+  ai_chatgpt_list:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/cutethotw/ClashRule/main/Rule/ChatGPT.list
+    path: ./ruleset/ai_chatgpt.list
+
+  ai_openai:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
+    path: ./ruleset/ai_openai.yaml
+
+  ai_claude:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml
+    path: ./ruleset/ai_claude.yaml
+
+  ai_gemini:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml
+    path: ./ruleset/ai_gemini.yaml
+
+  ai_google_list:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/cutethotw/ClashRule/main/Rule/Google.list
+    path: ./ruleset/ai_google.list
+
+  ai_copilot:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.yaml
+    path: ./ruleset/ai_copilot.yaml
+
+  ai_perplexity_list:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/cutethotw/ClashRule/main/Rule/Perplexity.list
+    path: ./ruleset/ai_perplexity.list
+
+  ai_grok_list:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/cutethotw/ClashRule/main/Rule/Grok.list
+    path: ./ruleset/ai_grok.list
+
+  # Microsoft / Apple
+  onedrive:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OneDrive/OneDrive.yaml
+    path: ./ruleset/onedrive.yaml
+
+  microsoft:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft.yaml
+    path: ./ruleset/microsoft.yaml
+
+  apple:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple.yaml
+    path: ./ruleset/apple.yaml
+
+  # Media / App
+  bilibili:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/Bilibili.list
+    path: ./ruleset/bilibili.list
+
+  youtube:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Ruleset/YouTube.list
+    path: ./ruleset/youtube.list
+
+  telegram:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Telegram.list
+    path: ./ruleset/telegram.list
+
+  game:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Game/Game.yaml
+    path: ./ruleset/game.yaml
+
+  pixiv:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Pixiv/Pixiv.yaml
+    path: ./ruleset/pixiv.yaml
+
+  ehgallery:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/EHGallery/EHGallery.yaml
+    path: ./ruleset/ehgallery.yaml
+
+  dmm:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/DMM/DMM.yaml
+    path: ./ruleset/dmm.yaml
+
+  globalmedia:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GlobalMedia/GlobalMedia_Classical.yaml
+    path: ./ruleset/globalmedia.yaml
+
+  chinamedia:
+    <<: *Anchor_RP_YAML
+    url: https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMedia/ChinaMedia.yaml
+    path: ./ruleset/chinamedia.yaml
+
+  # GFW / CN / Download
+  gfw:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list
+    path: ./ruleset/gfw.list
+
+  china_domain:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaDomain.list
+    path: ./ruleset/china_domain.list
+
+  china_company_ip:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ChinaCompanyIp.list
+    path: ./ruleset/china_company_ip.list
+
+  download:
+    <<: *Anchor_RP_TXT
+    url: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Download.list
+    path: ./ruleset/download.list
+
+
+# =========================
+# Rules（顺序严格按 ini）
+# =========================
+rules:
+  - RULE-SET,lan,🎯 全球直连
+  - RULE-SET,unban,🎯 全球直连
+  - RULE-SET,googlefcm,📢 谷歌FCM
+  - RULE-SET,steamcn,🎯 全球直连
+
+  - RULE-SET,ai_chatgpt_list,🧚 AI
+  - RULE-SET,ai_openai,🧚 AI
+  - RULE-SET,ai_claude,🧚 AI
+  - RULE-SET,ai_gemini,🧚 AI
+  - RULE-SET,ai_google_list,🧚 AI
+  - RULE-SET,ai_copilot,🧚 AI
+  - RULE-SET,ai_perplexity_list,🧚 AI
+  - RULE-SET,ai_grok_list,🧚 AI
+
+  - RULE-SET,onedrive,Ⓜ️ 微软云盘
+  - RULE-SET,microsoft,Ⓜ️ 微软服务
+  - RULE-SET,apple,🍎 苹果服务
+  - RULE-SET,bilibili,📺 哔哩哔哩
+  - RULE-SET,youtube,📹 油管视频
+  - RULE-SET,telegram,📲 电报消息
+  - RULE-SET,game,🎮 游戏平台
+  - RULE-SET,pixiv,🌏 Pixiv
+  - RULE-SET,ehgallery,🌏 EHGallery
+  - RULE-SET,dmm,🌏 DMM
+  - RULE-SET,globalmedia,🌍 国外媒体
+  - RULE-SET,chinamedia,🌏 国内媒体
+  - RULE-SET,gfw,🚀 节点选择
+
+  - RULE-SET,china_domain,🎯 全球直连
+  - RULE-SET,china_company_ip,🎯 全球直连
+  - RULE-SET,download,🎯 全球直连
+
+  - GEOIP,CN,🎯 全球直连
+  - MATCH,🐟 漏网之鱼
