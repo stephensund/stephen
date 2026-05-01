@@ -1,0 +1,64 @@
+# =========================
+# Download / BT Compatible Rules for Clash Meta
+# (No URL-REGEX)
+# =========================
+
+# --- Download clients (process based) ---
+PROCESS-NAME,aria2c.exe
+PROCESS-NAME,fdm.exe
+PROCESS-NAME,Folx.exe
+PROCESS-NAME,NetTransport.exe
+PROCESS-NAME,Thunder.exe
+PROCESS-NAME,Transmission.exe
+PROCESS-NAME,uTorrent.exe
+PROCESS-NAME,WebTorrent.exe
+PROCESS-NAME,WebTorrent Helper.exe
+PROCESS-NAME,qbittorrent.exe
+PROCESS-NAME,DownloadService.exe
+PROCESS-NAME,Weiyun.exe
+PROCESS-NAME,baidunetdisk.exe
+
+# --- "smtp" 原规则 DOMAIN-SUFFIX,smtp 在 Clash 里不合理
+# 这里用两种方式近似：1) 常见 smtp 主机名关键词 2) SMTP 端口
+DOMAIN-KEYWORD,smtp
+DST-PORT,25
+DST-PORT,465
+DST-PORT,587
+
+# --- aria2 keyword ---
+DOMAIN-KEYWORD,aria2
+
+# --- Baidu Map API (from URL-REGEX -> DOMAIN-REGEX) ---
+DOMAIN-REGEX,^(api|ps|sv|offnavi|newvector|ulog\.imap|newloc)(\.map)?\.(baidu|n\.shifen)\.com$
+
+# --- 360 / so / qihoo family (from URL-REGEX -> DOMAIN-REGEX + keyword fallback) ---
+DOMAIN-REGEX,^(.+\.)?(360|so|qihoo|360safe|qhimg|360totalsecurity|yunpan)\.(cn|com)$
+DOMAIN-KEYWORD,qihoo
+DOMAIN-KEYWORD,360safe
+DOMAIN-KEYWORD,360totalsecurity
+DOMAIN-KEYWORD,yunpan
+DOMAIN-SUFFIX,360.cn
+DOMAIN-SUFFIX,360.com
+DOMAIN-SUFFIX,so.com
+DOMAIN-SUFFIX,qihoo.com
+DOMAIN-SUFFIX,qihoo.cn
+
+# --- BT / Tracker / Magnet (URL-REGEX 无法等价，使用域名关键词近似兜底) ---
+# 注意：这类只能“近似识别”，真正强识别主要靠上面的 BT 客户端进程名
+DOMAIN-KEYWORD,tracker
+DOMAIN-KEYWORD,torrent
+DOMAIN-KEYWORD,bittorrent
+DOMAIN-KEYWORD,announce
+DOMAIN-KEYWORD,peer
+DOMAIN-KEYWORD,infohash
+
+# --- Xunlei related (from URL-REGEX -> DOMAIN-KEYWORD fallback) ---
+DOMAIN-KEYWORD,xunlei
+DOMAIN-KEYWORD,sandai
+DOMAIN-KEYWORD,xlliveud
+DOMAIN-KEYWORD,thunder
+
+# --- Xbox assets (from URL-REGEX -> DOMAIN-REGEX) ---
+DOMAIN-REGEX,^assets\d+\.xboxlive\.(com|cn)$
+DOMAIN-SUFFIX,xboxlive.com
+DOMAIN-SUFFIX,xboxlive.cn
